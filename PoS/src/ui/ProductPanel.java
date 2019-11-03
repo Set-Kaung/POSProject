@@ -71,7 +71,7 @@ public class ProductPanel extends JPanel {
 			categories = categoryService.getAllCategories();
 			for(Category category: categories)
 			{
-				categoryCombo.addItem(category.getName());
+				categoryCombo.addItem(category);
 			}
 		}
 		else 
@@ -79,7 +79,7 @@ public class ProductPanel extends JPanel {
 			categories = categoryService.getAllCategories();
 			for(Category category: categories)
 			{
-				categoryCombo.addItem(category.getName());
+				categoryCombo.addItem(category);
 			}
 		}
 		
@@ -103,11 +103,6 @@ public class ProductPanel extends JPanel {
 		add(nameLbl);
 		
 		brandCombo = new JComboBox();
-		brandCombo.addActionListener(e -> {
-		      JComboBox c = (JComboBox) e.getSource();
-		      Brand brand= (Brand) c.getSelectedItem();
-		      System.out.println(brand.getID() + " : " + brand.getName());
-		    });
 		brandCombo.setBounds(80, 88, 130, 27);
 		add(brandCombo);
 		

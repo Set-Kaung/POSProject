@@ -33,6 +33,6 @@ public void setName(String name) {
 	public String toString() 
 	{
 			// TODO Auto-generated method stub
-			return name;
+			return ID+"."+name;
 	}
 }

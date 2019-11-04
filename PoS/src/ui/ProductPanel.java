@@ -80,6 +80,7 @@ public class ProductPanel extends JPanel {
 			for(Category category: categories)
 			{
 				categoryCombo.addItem(category);
+				
 			}
 		}
 		

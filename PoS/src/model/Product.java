@@ -10,6 +10,44 @@ public class Product {
 	Long categoryID;
 	Double price;
 	Long stock;
+	Long barcode;
+	
+	
+	
+
+	public Long getBarcode() {
+		return barcode;
+	}
+
+	public void setBarcode(Long barcode) {
+		this.barcode = barcode;
+	}
+
+	public Product(Long ID, String name, String description, Long brandID, Long categoryID, Double price, Long stock,Long barcode) {
+		super();
+		this.ID = ID;
+		this.name = name;
+		this.description = description;
+		this.brandID = brandID;
+		this.categoryID = categoryID;
+		this.price = price;
+		this.stock = stock;
+		this.barcode = barcode;
+	}
+
+	
+	public Product(String name, String description, Long brandID, Long categoryID, Double price, Long stock, Long barcode) 
+	{
+		super();
+		this.name = name;
+		this.description = description;
+		this.brandID = brandID;
+		
+		this.categoryID = categoryID;
+		this.price = price;
+		this.stock = stock;
+		this.barcode = barcode;
+	}
 
 	public String getBrandName() {
 		return brandName;

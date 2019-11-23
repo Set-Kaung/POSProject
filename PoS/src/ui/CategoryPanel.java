@@ -35,7 +35,7 @@ public class CategoryPanel extends JPanel {
 		model = (DefaultTableModel) this.categoryTable.getModel();
 
 		for (Category category : categories) {
-			Object row[] = new Object[3];
+			Object row[] = new Object[2];
 			row[0] = category.getId();
 			row[1] = category.getName();
 
@@ -130,7 +130,8 @@ public class CategoryPanel extends JPanel {
 
 		JButton deleteBtn = new JButton("Delete");
 		deleteBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) 
+			{
 				int selectedIndex = categoryTable.getSelectedRow();
 
 				

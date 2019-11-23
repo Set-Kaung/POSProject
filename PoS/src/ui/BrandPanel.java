@@ -57,6 +57,12 @@ public class BrandPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public BrandPanel() {
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				brandTable.clearSelection();
+			}
+		});
 		setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();

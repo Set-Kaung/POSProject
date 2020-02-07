@@ -3,6 +3,7 @@ package services;
 import java.util.List;
 
 import dao.ProductDAO;
+import dto.ProductDTO;
 import model.Product;
 
 public class ProductServiceImpl implements ProductService {
@@ -30,6 +31,18 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void updateProduct(Product product) {
 		productDAO.updateProduct(product);
+		
+	}
+
+	@Override
+	public void restockProduct(Long ID, Long stock) {
+	productDAO.restockProduct(ID, stock);
+		
+	}
+
+	@Override
+	public ProductDTO getProductByBarcode(Long barcode) {
+		return productDAO.getProductByBarcode(barcode);
 		
 	}
 	

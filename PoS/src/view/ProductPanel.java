@@ -1,4 +1,4 @@
-package ui;
+package view;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -49,7 +49,7 @@ public class ProductPanel extends JPanel {
 	 */
 	
     
-    public void clearTextFileds() 
+    public void clearTextFields() 
     {
     	nameTextField.setText("");
     	descriptionTextField.setText("");
@@ -214,7 +214,7 @@ public class ProductPanel extends JPanel {
 				brandCombo.setSelectedIndex(0);
 				categoryCombo.setSelectedIndex(0);
 				reloadProducts();
-				clearTextFileds();
+				clearTextFields();
 			
 			}
 				
@@ -306,13 +306,15 @@ public class ProductPanel extends JPanel {
 				
 				
 				Long categoryIndex = Long.parseLong(tableModel.getValueAt(selectedIndex, 3).toString());
-				for(Category category: categories) 
-				{
-					if(categoryIndex == category.getId()) 
-					{
-						categoryCombo.setSelectedItem(category);
-					}
-				}
+//				for(Category category: categories) 
+//				{
+//					if(categoryIndex == category.getId()) 
+//					{
+//						categoryCombo.setSelectedItem(category);
+//					}
+//				}
+				
+				categoryCombo.setSelectedItem(categories.stream().filter(category -> category.getId() == categoryIndex));
 				
 				Long brandIndex = Long.parseLong(tableModel.getValueAt(selectedIndex, 4).toString());
 				for(Brand brand: brands) 
@@ -344,6 +346,33 @@ public class ProductPanel extends JPanel {
 		});
 		
 		JButton restockBtn = new JButton("Restock");
+		restockBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int selectedIndex = productTable.getSelectedRow();
+				if(selectedIndex == -1)
+				{
+					JOptionPane.showMessageDialog(null, "Please select a product");
+				}
+				else 
+				{
+				String input= JOptionPane.showInputDialog(null,"Enter amount to add:",0);
+				
+					if(!(input == null)) 
+					{
+						Long addAmount = Long.parseLong(input);
+						Long currentStock = Long.parseLong(tableModel.getValueAt(selectedIndex, 6).toString());
+						Long stock = addAmount + currentStock;
+						Long ID =  Long.parseLong(tableModel.getValueAt(selectedIndex, 0).toString());
+						productService.restockProduct(ID, stock);
+						reloadProducts();
+						clearTextFields();
+				
+					}
+				
+				}
+				clearTextFields();
+			}
+		});
 		restockBtn.setToolTipText("Increase item's quantity");
 		restockBtn.setBounds(500, 142, 117, 29);
 		add(restockBtn);
@@ -367,6 +396,20 @@ public class ProductPanel extends JPanel {
 		barcodeLbl.setHorizontalAlignment(SwingConstants.RIGHT);
 		barcodeLbl.setBounds(232, 77, 61, 16);
 		add(barcodeLbl);
+		
+		JButton clearBtn = new JButton("Clear");
+		clearBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				nameTextField.setText("");
+				descriptionTextField.setText("");
+				priceTextField.setText("");
+				stockTextField.setText("");
+				barcodeField.setText("");
+				
+			}
+		});
+		clearBtn.setBounds(615, 142, 117, 29);
+		add(clearBtn);
 		
 		
 		this.loadBrandComboBox();

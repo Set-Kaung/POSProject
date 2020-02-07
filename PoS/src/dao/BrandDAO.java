@@ -5,9 +5,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JOptionPane;
 
 import model.Brand;
 
@@ -19,7 +22,7 @@ public class BrandDAO {
  {
 	 try 
 	 {
-		 this.connection = DriverManager.getConnection(connectionURL,"root","");
+		 this.connection = DriverManager.getConnection(connectionURL,"root","FrostyAF");
 		 
 	 }
 	 catch(Exception e) 
@@ -99,21 +102,25 @@ public class BrandDAO {
 			statement = this.connection.prepareStatement("DELETE FROM Brand WHERE ID=?");
 			statement.setLong(1, ID);
 	    	statement.executeUpdate();
-	    	
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+	    	catch (SQLIntegrityConstraintViolationException e) 
+		 	{
+				JOptionPane.showMessageDialog(null, "Cannot delete a brand refrenced in a product.");
+				}
+		 	catch(SQLException e) 
+		 	{
+		 		e.printStackTrace();
+		 	}
  }
  
  public static void main(String[] args) {
 	BrandDAO dao = new BrandDAO();
-	List<Brand> brands = dao.getAllBrand();
-	
-	for(Brand brand:brands) 
-	{
-		System.out.println(brand.getName());
-	}
+//	List<Brand> brands = dao.getAllBrand();
+//	
+//	for(Brand brand:brands) 
+//	{
+//		System.out.println(brand.getName());
+//	}
 }
  
 }

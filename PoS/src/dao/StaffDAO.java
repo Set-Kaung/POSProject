@@ -13,7 +13,7 @@ import model.Staff;
 import services.PBKDF2Hasher;
 
 public class StaffDAO {
-	String connectionUrl = "jdbc:mysql://localhost:3306/pos_project";
+	private String connectionUrl = "jdbc:mysql://localhost:3306/pos_project";
     Connection connection = null;
     
     PBKDF2Hasher hasher = new PBKDF2Hasher();

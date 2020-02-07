@@ -1,4 +1,4 @@
-package ui;
+package view;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -77,6 +77,9 @@ public class MainPage extends JFrame {
 		
 		ProductPanel productPanel = new ProductPanel();
 		tabbedPane.addTab("Product", productPanel);
+		
+		SalePanel salePanel = new SalePanel();
+		tabbedPane.addTab("Sale", salePanel);
 		
 		
 	}

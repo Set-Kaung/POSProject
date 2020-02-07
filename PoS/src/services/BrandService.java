@@ -8,4 +8,5 @@ public interface BrandService {
 	void addBrand(String name);
 	void updateBrand(Long ID, String name);
 	void deleteBrand(Long ID);
+	
 }
